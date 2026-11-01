@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWE Foundry — Software lifecycle workflows for coding agents</title>
+  <meta name="description" content="SWE Foundry is an agent plugin that gives coding agents a persistent, evidence-based engineering workflow — discover, design, plan, implement, review and release — with delivery guarantees checked by commands.">
+  <meta name="theme-color" content="#16191f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SWE Foundry">
+  <meta property="og:description" content="Design, build, and evolve software with durable project memory.">
+  <meta property="og:image" content="https://swe-foundry.syscake.it/assets/icon.png">
+  <meta property="og:url" content="https://swe-foundry.syscake.it/">
+  <link rel="canonical" href="https://swe-foundry.syscake.it/">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="SWE Foundry home">
+        <img src="assets/icon.png" alt="" width="32" height="32">
+        <span>SWE Foundry</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
+        <span class="sr-only">Menu</span><span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-links" data-nav-links>
+        <li><a href="#why">Why Foundry</a></li>
+        <li><a href="#lifecycle">Lifecycle</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#guarantees">Guarantees</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a class="btn btn-primary btn-sm" href="https://github.com/SysCake/swe-foundry-site/releases/latest" data-release-link>Download</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pill">v<span data-release-version>0.5.1</span></span> Agent plugin for Codex, Claude Code &amp; Agent Plugins hosts</p>
+          <h1>Your coding agent, <span class="accent">with an engineering memory.</span></h1>
+          <p class="lead">SWE Foundry turns a coding agent into a disciplined engineering partner. It carries your project from a rough idea — or an existing codebase — through design, planning, implementation, review and release, keeps every decision in your repository so any session can pick up where the last one stopped, and checks its delivery promises with commands instead of trusting prose.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/SysCake/swe-foundry-site/releases/latest" data-release-link>
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Download the plugin
+            </a>
+            <a class="btn btn-ghost" href="#lifecycle">See how it works</a>
+          </div>
+          <ul class="hero-facts" aria-label="Key facts">
+            <li><strong>9</strong> composable skills</li>
+            <li><strong>4</strong> model-tier agents</li>
+            <li><strong>2</strong> guard hooks</li>
+            <li><strong>0</strong> services to run</li>
+          </ul>
+        </div>
+
+        <figure class="session" aria-label="Example SWE Foundry session">
+          <div class="session-bar" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="session-title">workshop-lending — agent session</span>
+          </div>
+          <div class="session-body" data-session>
+            <div class="msg msg-user" data-step>
+              <span class="who">You</span>
+              <p>I have an idea for an app that helps a shared workshop manage tool lending. Help me structure it.</p>
+            </div>
+            <div class="msg msg-agent" data-step>
+              <span class="who"><img src="assets/icon.png" alt="" width="16" height="16"> Foundry</span>
+              <p>Routing to <code>foundry-discover</code>. I saved a first brief and recorded the decisions so far. Next question: who can borrow tools — only members, or also guests vouched for by a member?</p>
+            </div>
+            <div class="files" data-step aria-label="Files written to the repository">
+              <div class="file"><span class="tick" aria-hidden="true">✓</span><code>docs/engineering/BRIEF.md</code><span class="tag">draft</span></div>
+              <div class="file"><span class="tick" aria-hidden="true">✓</span><code>.swe-foundry/state.json</code><span class="tag">rev 3</span></div>
+              <div class="file"><span class="tick" aria-hidden="true">✓</span><code>.swe-foundry/history.jsonl</code><span class="tag">chained</span></div>
+            </div>
+            <div class="msg msg-agent msg-next" data-step>
+              <span class="who">Next useful step</span>
+              <p>When the scope is settled: <em>“Use foundry-design on the brief to prepare the PRD and architecture.”</em></p>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <div class="container">
+        <ul class="works-with" aria-label="Works with">
+          <li>Codex</li>
+          <li>Claude Code</li>
+          <li>Agent Plugins 1.0</li>
+          <li>GitHub</li>
+          <li>Jira</li>
+          <li>Python 3.11+ stdlib</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Why Foundry</p>
+          <h2>Agents write code fast.<br>Projects need continuity.</h2>
+          <p class="section-lead">A single chat can produce an impressive diff. A product needs requirements that stay true, plans that survive the session, and claims backed by evidence. Foundry adds that missing layer — without adding a platform.</p>
+        </div>
+
+        <div class="contrast">
+          <div class="contrast-col contrast-before">
+            <h3>Without a workflow</h3>
+            <ul>
+              <li>Context evaporates when the conversation ends.</li>
+              <li>Code drifts away from the documents that describe it.</li>
+              <li>“Done” means the agent said so — merged, reviewed or tested, who knows.</li>
+              <li>Every new session starts the interview from scratch.</li>
+            </ul>
+          </div>
+          <div class="contrast-col contrast-after">
+            <h3>With SWE Foundry</h3>
+            <ul>
+              <li>Briefs, decisions and plans are versioned in your repository.</li>
+              <li>Design documents are updated <em>before</em> behavior changes.</li>
+              <li>Commands check every delivery promise before a pull request is handed over.</li>
+              <li>Any session — or another agent — resumes from the files.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+            <h3>Durable project memory</h3>
+            <p>Requirements, architecture, ADRs, backlog and a revision-checked, digest-chained history live next to the code. Nothing important depends on a model remembering a long conversation.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3Z"/></svg></div>
+            <h3>Evidence, not claims</h3>
+            <p>Test runs, CI on the current head, review verdicts and provider read-backs are recorded as they happen. Simulated checks are never presented as live ones.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div>
+            <h3>Senior defaults, built in</h3>
+            <p>Test-driven development with a verifiable red commit, small increments, current design documents, security, operability and performance budgets — with Standard or Advisory discipline and explicit overrides.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg></div>
+            <h3>Plan now, implement later</h3>
+            <p>Refine an idea for weeks, publish a backlog, and implement a selected story in a different session. Each issue carries an executable plan that is re-checked against current code; empirical unknowns become bounded spikes.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h3>An independent final review</h3>
+            <p>After author checks and CI, a reviewer in a fresh context — the strongest model unless you choose another — checks the exact pull request revision against a fixed rubric, and its verdict is published on the PR. Where the host offers no separate context, that is disclosed. Findings come back to you — nothing is merged or auto-fixed behind your back.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
+            <h3>Your tracker, your tools</h3>
+            <p>Reconcile work with Jira or GitHub through the connectors your agent already has, or export a validated Jira CSV. Foundry never ships credentials or pretends a remote write happened.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lifecycle -->
+    <section class="section section-alt" id="lifecycle">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">The lifecycle</p>
+          <h2>One workflow, from idea to release.<br>Use all of it — or just one phase.</h2>
+          <p class="section-lead">Every phase is a focused skill. Finishing one never silently starts the next: Foundry tells you what is complete, where it is saved, and proposes the most useful next step.</p>
+        </div>
+
+        <div class="lifecycle" data-lifecycle>
+          <div class="phase-track" role="tablist" aria-label="Lifecycle phases">
+            <button class="phase" role="tab" id="tab-discover" aria-controls="panel-discover" aria-selected="true"><span class="phase-num">01</span><span class="phase-name">Discover</span></button>
+            <button class="phase" role="tab" id="tab-design" aria-controls="panel-design" aria-selected="false" tabindex="-1"><span class="phase-num">02</span><span class="phase-name">Design</span></button>
+            <button class="phase" role="tab" id="tab-plan" aria-controls="panel-plan" aria-selected="false" tabindex="-1"><span class="phase-num">03</span><span class="phase-name">Plan</span></button>
+            <button class="phase" role="tab" id="tab-implement" aria-controls="panel-implement" aria-selected="false" tabindex="-1"><span class="phase-num">04</span><span class="phase-name">Implement</span></button>
+            <button class="phase" role="tab" id="tab-review" aria-controls="panel-review" aria-selected="false" tabindex="-1"><span class="phase-num">05</span><span class="phase-name">Review</span></button>
+            <button class="phase" role="tab" id="tab-release" aria-controls="panel-release" aria-selected="false" tabindex="-1"><span class="phase-num">06</span><span class="phase-name">Release</span></button>
+          </div>
+
+          <div class="phase-panel" role="tabpanel" id="panel-discover" aria-labelledby="tab-discover">
+            <div>
+              <p class="skill-name">foundry-discover</p>
+              <h3>Shape the idea through real dialogue</h3>
+              <p>Start from something rough. Foundry organizes what is known, challenges unsupported assumptions and asks one substantive question at a time. Decisions, alternatives and open questions are saved, so the conversation can span many sessions without losing depth. When only an experiment can settle a question, it proposes a spike instead of guessing.</p>
+              <ul class="outputs"><li>BRIEF.md</li><li>Decisions</li><li>Open questions</li><li>Spike proposals</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Use foundry-discover for thorough idea refinement only. Explore the idea with me one question at a time.”</blockquote>
+          </div>
+          <div class="phase-panel" role="tabpanel" id="panel-design" aria-labelledby="tab-design" hidden>
+            <div>
+              <p class="skill-name">foundry-design</p>
+              <h3>Turn intent into specifications</h3>
+              <p>Requirements, architecture, contracts, quality strategy and decision records — kept current and consistent. Facts available in the code are inspected; real product choices become questions for you. Products with an interface get an optional brand identity and design-system proposal, offered once.</p>
+              <ul class="outputs"><li>PRD</li><li>Architecture &amp; diagrams</li><li>ADRs</li><li>Quality strategy</li><li>Brand &amp; design system</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Use foundry-design on the brief to prepare the PRD and architecture; stop before backlog creation.”</blockquote>
+          </div>
+          <div class="phase-panel" role="tabpanel" id="panel-plan" aria-labelledby="tab-plan" hidden>
+            <div>
+              <p class="skill-name">foundry-backlog · foundry-sync</p>
+              <h3>A backlog an agent can actually execute</h3>
+              <p>Epics, stories, tasks, bugs, debt and spikes with testable acceptance criteria, justified dependencies and an executable plan in each description. Small fixes take the lite tier: one <code>issue add</code> call. Publish to Jira or GitHub with verified read-back, or export a lossless Jira CSV.</p>
+              <ul class="outputs"><li>Canonical backlog</li><li>Acceptance criteria</li><li>Dependency graph</li><li>Tracker sync</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Turn this PRD into stories with acceptance criteria and dependencies, then publish them to GitHub.”</blockquote>
+          </div>
+          <div class="phase-panel" role="tabpanel" id="panel-implement" aria-labelledby="tab-implement" hidden>
+            <div>
+              <p class="skill-name">foundry-implement</p>
+              <h3>Selected work, delivered test-first</h3>
+              <p>Pick the issues to build. Foundry re-reads their plan against the current code and lands a failing <code>test(&lt;ISSUE&gt;)</code> commit before the implementation. The strongest model coordinates; a medium-tier worker can take a whole planned unit. Delivery is a pull request on a typed branch, with current CI and <code>deliver-check</code>.</p>
+              <ul class="outputs"><li>Verifiable red commit</li><li>Recorded stages</li><li>Pull request</li><li>Criterion coverage</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Implement STORY-001 now.”</blockquote>
+          </div>
+          <div class="phase-panel" role="tabpanel" id="panel-review" aria-labelledby="tab-review" hidden>
+            <div>
+              <p class="skill-name">foundry-review</p>
+              <h3>A second pair of eyes that isn’t the author</h3>
+              <p>A fresh reviewer context receives the request, the approved plan, the exact diff and the check evidence — not the author’s conversation. It covers a fixed rubric, reproduces the red commit, and its verdict is published on the PR bound to the reviewed head. Then control comes back to you.</p>
+              <ul class="outputs"><li>Verdict</li><li>Findings</li><li>Published review</li><li>You decide what’s next</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Review this pull request against its plan and acceptance criteria.”</blockquote>
+          </div>
+          <div class="phase-panel" role="tabpanel" id="panel-release" aria-labelledby="tab-release" hidden>
+            <div>
+              <p class="skill-name">foundry-release</p>
+              <h3>Releases you can account for</h3>
+              <p>A versioned release kit keeps every version copy in step, prepares a release PR from one frozen commit and, only after you merge it, tags and publishes the artifacts with checksums. Rollback constraints are recorded, and post-release feedback flows straight into new backlog items.</p>
+              <ul class="outputs"><li>Release kit</li><li>Rollback plan</li><li>Verified publication</li><li>Feedback intake</li></ul>
+            </div>
+            <blockquote class="prompt"><span>Try</span>“Prepare release 1.2.0 from develop and stop before publishing.”</blockquote>
+          </div>
+        </div>
+
+        <div class="entries">
+          <article class="entry">
+            <p class="entry-tag">Greenfield</p>
+            <h3>Start from an idea</h3>
+            <p>“Use Foundry to refine this idea, design the first increment, and prepare an implementable backlog.”</p>
+          </article>
+          <article class="entry">
+            <p class="entry-tag">Evolution</p>
+            <h3>Grow a product</h3>
+            <p>“Use Foundry to add this capability to the existing product, updating requirements before implementation.”</p>
+          </article>
+          <article class="entry">
+            <p class="entry-tag">Adoption</p>
+            <h3>Take over a codebase</h3>
+            <p>“Use Foundry to understand this repository and establish a trustworthy baseline before fixing the reported bug.”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">How it works</p>
+          <h2>Judgment from the agent.<br>Guarantees from the tools.</h2>
+          <p class="section-lead">Skills handle the conversation and the engineering decisions. A small standard-library Python runtime, four agents and two hooks handle what must be exact. Your repository holds the result.</p>
+        </div>
+
+        <div class="layers">
+          <div class="layer">
+            <span class="layer-num">1</span>
+            <h3>Skills</h3>
+            <p>Nine composable Markdown skills guide dialogue, design, planning, delivery and review inside the agent you already use.</p>
+          </div>
+          <div class="layer-arrow" aria-hidden="true"></div>
+          <div class="layer">
+            <span class="layer-num">2</span>
+            <h3>Deterministic runtime</h3>
+            <p>Self-validating <code>apply</code>, <code>close</code>, <code>deliver-check</code>, <code>review-publish</code>, sync planning, CSV export and the release kit. Python 3.11+, no packages to install.</p>
+          </div>
+          <div class="layer-arrow" aria-hidden="true"></div>
+          <div class="layer layer-repo">
+            <span class="layer-num">3</span>
+            <h3>Your repository</h3>
+            <p>Documents in <code>docs/engineering/</code>, <code>state.json</code> and a digest-chained <code>history.jsonl</code> in <code>.swe-foundry/</code>, plus a copied tools bundle your CI can run.</p>
+          </div>
+        </div>
+
+        <div class="skills">
+          <h3 class="skills-title">The nine skills</h3>
+          <ul class="skill-grid">
+            <li><code>foundry</code><span>Start, route and resume work.</span></li>
+            <li><code>foundry-adopt</code><span>Reconstruct an existing repository’s baseline.</span></li>
+            <li><code>foundry-discover</code><span>Refine ideas and changes through dialogue.</span></li>
+            <li><code>foundry-design</code><span>Requirements, architecture, contracts and ADRs.</span></li>
+            <li><code>foundry-backlog</code><span>Traceable work with meaningful dependencies.</span></li>
+            <li><code>foundry-sync</code><span>Reconcile Jira or GitHub, or export CSV.</span></li>
+            <li><code>foundry-implement</code><span>Selected work through reviewed PR delivery.</span></li>
+            <li><code>foundry-review</code><span>Review designs or code and verify findings.</span></li>
+            <li><code>foundry-release</code><span>Authorized releases and the feedback loop.</span></li>
+          </ul>
+        </div>
+
+        <div class="skills">
+          <h3 class="skills-title">Four model-tier agents</h3>
+          <p class="skills-note">The strongest model coordinates and reviews; cheaper tiers take whole planned units. Agents run at depth one and never write shared state. Claude Code loads them with the plugin; Codex projects can generate equivalents with <code>init --codex-agents</code>. Your recorded model choices win.</p>
+          <ul class="skill-grid agent-grid">
+            <li><code>foundry-implementer</code><span>Medium tier. One PR-sized unit from a precise plan, test commit first.</span></li>
+            <li><code>foundry-reviewer</code><span>Strongest tier, fresh context. The final review against the rubric.</span></li>
+            <li><code>foundry-researcher</code><span>Medium tier. Spikes and source-cited research.</span></li>
+            <li><code>foundry-mechanic</code><span>Small tier. Fully specified mechanical edits only.</span></li>
+          </ul>
+        </div>
+
+        <div class="control">
+          <div class="control-copy">
+            <p class="kicker">You stay in control</p>
+            <h3>Clear boundaries, every time.</h3>
+            <p>Foundry follows only the phases your request authorizes. It recommends; you decide.</p>
+          </div>
+          <ul class="control-list">
+            <li>No merge, auto-merge or force-push without an authorization you recorded — a guardrail hook blocks them.</li>
+            <li>No release without your merge, and no automatic fixes to final review findings.</li>
+            <li>No invented tracker keys, credentials or remote writes.</li>
+            <li>Conversation in your language; everything persisted in English.</li>
+            <li>Your existing conventions are preserved during adoption.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guarantees -->
+    <section class="section section-alt" id="guarantees">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Guarantees</p>
+          <h2>Promises checked by commands,<br>not left to prose.</h2>
+          <p class="section-lead">More instructions do not make an agent more compliant. A guarantee is real only when a deterministic command checks or performs it, so Foundry ships those commands and runs them at the right moments.</p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+            <h3><code>deliver-check</code></h3>
+            <p>Before handoff, one command lists what the pull request still lacks: branch and base, CI on the head, a published review covering the rubric, validation, issue status, English prose, lockfiles, spike scope and version consistency.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></div>
+            <h3>Verifiable red</h3>
+            <p>A <code>test(&lt;ISSUE&gt;)</code> commit must fail on behavior before the implementation lands. The check replays red on that commit and green on the head, so TDD is evidence, not a claim.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7M17 15l2 2 3-4"/></svg></div>
+            <h3><code>apply</code> and <code>close</code></h3>
+            <p>Every state change is one revision-checked write that validates the result. <code>close</code> records a delivery stage — issue status, evidence, backlog view and approved digest — in a single call.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></div>
+            <h3><code>review-publish</code></h3>
+            <p>The final review is published on the pull request with a marker bound to the reviewed head, and its receipt stays local, so the head never changes just to record its review.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3ZM9.5 9.5l5 5m0-5-5 5"/></svg></div>
+            <h3>Host hooks</h3>
+            <p>A guardrail hook blocks merges and auto-merge unless you recorded an authorization for the pull request’s base branch, and force-pushes without a separate grant. A Stop hook runs <code>deliver-check</code> once before the agent finishes. One hooks file serves Codex and Claude Code.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></div>
+            <h3>Measured, not assumed</h3>
+            <p>A benchmark with real headless agent runs compares the plugin with plain agent work. In the October 2026 campaign every measured guarantee held in all 12 plugin runs, and three of four overhead targets were met.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section class="section section-paper" id="install">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Get started</p>
+          <h2>Install in a couple of minutes.</h2>
+          <p class="section-lead">Requirements: a coding agent with repository access, Python 3.11+ and Git. No Python packages, virtual environments or background services. GitHub and Jira tools are optional until you ask for remote work.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <div>
+              <h3>Download the release</h3>
+              <p>Get <code>swe-foundry-<span data-release-version>0.5.1</span>.zip</code> from the release page. The GitHub-generated “Source code” archive is not the packaged plugin.</p>
+              <a class="btn btn-dark btn-sm" href="https://github.com/SysCake/swe-foundry-site/releases/latest" data-release-link>Go to the latest release</a>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <div class="step-wide">
+              <h3>Add it to your agent</h3>
+              <div class="tabs" data-tabs>
+                <div class="tab-list" role="tablist" aria-label="Agent host">
+                  <button role="tab" id="itab-codex" aria-controls="ipanel-codex" aria-selected="true">Codex</button>
+                  <button role="tab" id="itab-claude" aria-controls="ipanel-claude" aria-selected="false" tabindex="-1">Claude Code</button>
+                  <button role="tab" id="itab-other" aria-controls="ipanel-other" aria-selected="false" tabindex="-1">Other hosts</button>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="ipanel-codex" aria-labelledby="itab-codex">
+                  <p>In the Codex desktop app open <strong>Plugins → Add → Upload plugin archive</strong> and select the ZIP. Leave it compressed. To update, use the archive replacement control and check that the displayed version matches the release.</p>
+                  <p>Codex skips plugin hooks until you trust them: run <code>/hooks</code> in the Codex CLI, review the two Foundry hooks and trust them.</p>
+                  <p class="hint">Want the four agents as Codex custom agents? Run <code>init --codex-agents</code> in the project. Prefer local marketplaces? Follow the marketplace steps in the installation guide shipped with the plugin.</p>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="ipanel-claude" aria-labelledby="itab-claude" hidden>
+                  <p>Extract the complete <code>swe-foundry</code> directory, including hidden folders, then validate and load it. The agents and hooks load with the plugin.</p>
+                  <div class="code"><pre><code>claude plugin validate /path/to/swe-foundry --strict</code></pre><button class="copy" type="button" data-copy>Copy</button></div>
+                  <div class="code"><pre><code>claude --plugin-dir /path/to/swe-foundry</code></pre><button class="copy" type="button" data-copy>Copy</button></div>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="ipanel-other" aria-labelledby="itab-other" hidden>
+                  <p>Load the extracted directory with your host’s local-plugin mechanism; <code>plugin.json</code> declares Agent Plugins 1.0.0 and the skills follow Agent Skills. Keep <code>skills/</code>, <code>references/</code>, <code>templates/</code>, <code>schemas/</code>, <code>scripts/</code>, <code>agents/</code> and <code>hooks/</code> together.</p>
+                  <p class="hint">No native plugin support? Ask your agent to read <code>skills/foundry/SKILL.md</code> from the extracted folder.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <div>
+              <h3>Check the runtime <span class="optional">optional</span></h3>
+              <p>Confirm Python can run the helpers. Nothing in your projects is changed.</p>
+              <div class="code"><pre><code>python3 /path/to/swe-foundry/scripts/foundry.py --help</code></pre><button class="copy" type="button" data-copy>Copy</button></div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">4</span>
+            <div>
+              <h3>Open a project and ask</h3>
+              <p>Start a fresh conversation in your repository, attach SWE Foundry and describe the outcome you want. You don’t need to name a skill — Foundry routes the request.</p>
+              <div class="code"><pre><code>Use Foundry to understand this repository and propose the next useful step.</code></pre><button class="copy" type="button" data-copy>Copy</button></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <img class="cta-logo" src="assets/icon.png" alt="" width="88" height="88">
+        <h2>Build software that remembers why.</h2>
+        <p>Runs inside the agent you already use. Keeps everything in your repository.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/SysCake/swe-foundry-site/releases/latest" data-release-link>Download SWE Foundry <span class="btn-meta">v<span data-release-version>0.5.1</span></span></a>
+          <a class="btn btn-ghost" href="#install">Installation steps</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <img src="assets/icon.png" alt="" width="28" height="28">
+        <span>SWE Foundry</span>
+      </div>
+      <p>Software lifecycle workflows for coding agents.</p>
+      <ul class="footer-links">
+        <li><a href="#lifecycle">Lifecycle</a></li>
+        <li><a href="#guarantees">Guarantees</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="https://github.com/SysCake/swe-foundry-site/releases/latest" data-release-link>Releases</a></li>
+      </ul>
+      <a class="syscake-credit" href="https://syscake.it/" target="_blank" rel="noopener noreferrer"
+        aria-label="Made with love by Syscake. Visit Syscake website.">
+        <span>Made with love by Syscake ❤️</span>
+        <img src="assets/syscake-logo-white.svg" alt="Syscake" width="108" height="32">
+      </a>
+      <p class="copyright">© 2026 Syscake S.r.l. Proprietary software, all rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
