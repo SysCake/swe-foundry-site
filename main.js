@@ -6,7 +6,7 @@
 // data-release-link / data-release-version is kept in sync with these values;
 // the static HTML carries the same defaults as a no-JS fallback.
 const RELEASE = {
-  version: "0.5.1",
+  version: "0.6.0",
   url: "https://github.com/SysCake/swe-foundry-site/releases/latest",
 };
 
